@@ -1,0 +1,82 @@
+.currentUser {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  width: 90%;
+  margin: 10px auto;
+  font-size: 13px;
+  line-height: 3;
+}
+.avatar {
+  width: 23px;
+  height: 23px;
+  padding: 2px;
+  margin: 6px 6px;
+  border-radius: 50px;
+}
+.avatarContainer {
+  display: flex;
+  flex-direction: row;
+}
+.usersInfo {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+}
+.leadertable {
+  margin: 0 auto;
+  direction: rtl;
+}
+.board {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.board td:nth-child(1) {
+  width: 17%;
+}
+.board td {
+  list-style: none;
+  font-size: 12px;
+  line-height: 3.5;
+  width: 25%;
+  border-bottom: 1px solid #e6e6e6;
+}
+.board td:nth-child(2) {
+  width: 44%;
+  font-weight: bold;
+}
+.board td:nth-child(3) {
+  width: 12%;
+}
+.board th:nth-child(3) {
+  width: 12%;
+}
+.board th:nth-child(4) {
+  width: 27%;
+}
+.board td:nth-child(4) {
+  width: 27%;
+}
+.board th {
+  background-color: #5e53d0;
+  list-style: none;
+  font-size: 13px;
+  line-height: 3;
+  width: 25%;
+  padding: 0 10px;
+  color: #fff;
+}
+.board th:nth-child(1) {
+  width: 17%;
+}
+.board th:nth-child(2) {
+  width: 44%;
+}
+.leaders {
+  background-color: #fff;
+}

@@ -1,0 +1,176 @@
+.special-gamebox {
+  width: 90%;
+  margin: 7px auto;
+  /* display: inline-block; */
+  border-radius: 13px;
+  box-shadow: 0px 4px 13px 1px rgba(209, 209, 209, 1);
+  position: relative;
+  background-repeat: no-repeat;
+  display: block;
+  height: 210px;
+  background-position: top right;
+  background-size: cover;
+}
+.special-gamebox.notstarted {
+  pointer-events: none;
+}
+.foreground-box-started,
+.foreground-box-finished {
+  position: relative;
+  top: 5%;
+  /* right: 11%; */
+  padding: 10px;
+  background-color: #fff;
+  width: 73%;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 21px 1px rgba(74, 74, 74, 0.44);
+  -moz-box-shadow: 0px 0px 21px 1px rgba(74, 74, 74, 0.44);
+  box-shadow: 0px 0px 21px 1px rgba(74, 74, 74, 0.44);
+  margin: 0 auto;
+  z-index: 1;
+}
+.foreground-box-notstarted {
+  position: relative;
+  top: 26%;
+  /* right: 11%; */
+  padding: 10px;
+  background-color: #fff;
+  width: 73%;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 21px 1px rgba(74, 74, 74, 0.44);
+  -moz-box-shadow: 0px 0px 21px 1px rgba(74, 74, 74, 0.44);
+  box-shadow: 0px 0px 21px 1px rgba(74, 74, 74, 0.44);
+  margin: 0 auto;
+  z-index: 1;
+  font-size: 11pt;
+}
+.special-info-bar-started,
+.special-info-bar-finished {
+  display: -ms-flexbox;
+  display: inline-block;
+  padding: 0px;
+  -ms-flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
+  -ms-flex-pack: justify;
+  /* justify-content: space-between; */
+  height: 38%;
+  background-color: #fdd835;
+  margin-top: 0;
+  width: 100%;
+  -webkit-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  bottom: 20px;
+  z-index: 0;
+  position: relative;
+}
+.foreground-box-started .clock-box,
+.foreground-box-finished .clock-box {
+  width: 145px;
+  height: 35px;
+  line-height: 37px;
+  /* background-color: #fdd835; */
+  /* border-radius: 8px; */
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 19px;
+}
+.special-game-info-notstarted .clock-box {
+  width: 145px;
+  height: 35px;
+  line-height: 35px;
+  /* background-color: #fff; */
+  border-radius: 8px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 19px;
+}
+.special-game-info-notstarted .clock-wrapper {
+  width: 210px;
+}
+
+.foreground-box-started .clock-wrapper,
+.foreground-box-finished .clock-wrapper {
+  width: 210px;
+  font-size: 25px;
+  margin: 5px auto;
+}
+.special-game-info-started,
+.special-game-info-finished {
+  display: -ms-flexbox;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  -ms-flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
+  -ms-flex-pack: justify;
+  /* justify-content: space-between; */
+  height: 37%;
+  background-color: rgba(253, 216, 53, 1);
+  width: 100%;
+  -webkit-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.special-game-info-notstarted {
+  display: -ms-flexbox;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  -ms-flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
+  -ms-flex-pack: justify;
+  /* justify-content: space-between; */
+  height: 50%;
+  background-color: #fdd835;
+  width: 100%;
+  -webkit-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.special-gamebox .play-btn {
+  background-color: #ffffff;
+  padding: 6px 15px;
+  color: #000;
+  border-radius: 18px;
+  direction: rtl;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  position: relative;
+  top: 38px;
+}
+.notstarted-bar {
+  margin-top: 30px;
+  line-height: 2.5;
+  font-size: 12px;
+
+  direction: rtl;
+}
+.special-gamebox .title {
+  font-size: 14pt;
+}
+.special-gamebox .prize {
+  font-size: 12pt;
+}
+.special-gamebox .notstarted-bar span {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+/*------------------------------------*/
