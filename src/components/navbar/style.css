@@ -1,0 +1,22 @@
+.navbar-btn {
+  position: absolute;
+  right: 5%;
+  top: 16px;
+}
+.navbar {
+  height: 35px;
+  background-color: rgb(255, 255, 255);
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+.navbar-headline {
+  line-height: 2;
+}

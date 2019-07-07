@@ -1,0 +1,12 @@
+.prize-range {
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.prize-range p {
+  margin: 0;
+}
+.price {
+  font-weight: bold;
+}
