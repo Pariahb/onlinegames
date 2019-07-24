@@ -31,6 +31,7 @@ class GamePage extends Component {
         popup: false
       });
     }
+
   }
   popupInfo(yourRank, yourPrize, yourNextLevelPoint, yourNextLevelPrize) {
     this.setState({
@@ -38,8 +39,9 @@ class GamePage extends Component {
       yourPrize: yourPrize,
       yourNextLevelPoint: yourNextLevelPoint,
       yourNextLevelPrize: yourNextLevelPrize
-    });
+        });
   }
+
   closePopup() {
     if (this.state.popup) {
       this.setState({
@@ -72,6 +74,7 @@ class GamePage extends Component {
             gamename={this.props.gamename}
             popupInfo={this.popupInfo}
             gameState={this.state.gameState}
+            gameType={this.props.gameType}
           />
         </div>
         {this.state.popup ? (
@@ -81,9 +84,13 @@ class GamePage extends Component {
             closePopup={this.closePopup}
             yourRank={this.state.yourRank}
             yourPrize={this.state.yourPrize}
+            players={this.props.players}
+            gamename={this.props.gamename}
+            gametoken={this.props.gametoken}
             yourNextLevelPoint={this.state.yourNextLevelPoint}
             yourNextLevelPrize={this.state.yourNextLevelPrize}
             starttime={this.props.starttime}
+            gameType={this.props.gameType}
             endtime={this.props.endtime}
           />
         ) : null}

@@ -7,9 +7,34 @@ class Popup extends Component {
     this.state = {
       nextPrize: 0,
       nextPoint: 0,
-      yourPrize: 0
+      yourPrize: 0,
+      gameType: null,
+      yourRank:0,
+      gamename:"",
+      webengage: window.webengage,
+      gametoken: ""
     };
+
     this.toPersianDigits = this.toPersianDigits.bind(this);
+    this.setRetryEvent = this.setRetryEvent.bind(this);
+  }
+  setWebWngageEvent(){
+    this.setRetryEvent()
+  }
+  setRetryEvent(){
+    let myNowTime = new Date() / 1000;
+    let myEndTime = this.props.endtime;
+    let lastMinutes = myEndTime - myNowTime;
+    let diffMins = Math.round(((lastMinutes % 86400000) % 3600000) / 60); // minutes
+
+    this.state.webengage.track("web_game_retry", {
+      game_name: this.props.gamename,
+      game_token : this.props.gametoken,
+      remaining_time: diffMins,
+      score: this.props.yourRank,
+      current_participants:this.props.players,
+      amount_won: this.props.yourPrize
+    });
   }
   toPersianDigits(string) {
     let id = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
@@ -21,17 +46,40 @@ class Popup extends Component {
     let dt = new Date(t * 1000);
     return dt;
   }
+
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.yourNextLevelPrize !== this.props.yourNextLevelPrize) {
       this.setState({
         nextPrize: this.props.yourNextLevelPrize,
         nextPoint: this.props.yourNextLevelPoint,
-        yourPrize: this.props.yourPrize
+        yourPrize: this.props.yourPrize,
+        yourPoints: this.props.yourRank,
+        gameType: localStorage.getItem("gameType"),
+        gamename: this.props.gamename
+
       });
     }
-  }
 
+  }
+  // webEngage(){
+  //   console.log("typepop",this.props.gameType)
+  //   console.log("game_namepop",this.props.gamename)
+  //   console.log("game_tokenpop", this.props.gametoken)
+  //   console.log("scorepop", this.state.yourPoints)
+  //   // console.log("rankpop", this.porps.yourRank)
+  //   // console.log("amount_wonpop", this.porps.yourPrize)
+  //   this.state.webengage.track("web_game_submit_score", {
+  //     type: this.props.gameType,
+  //     game_name: this.props.gamename,
+  //     game_token : this.state.gametoken,
+  //     score: this.state.yourPoints
+  //     // rank:this.props.yourRank,
+  //     // amount_won: this.props.yourPrize
+  //   });
+  // }
   render() {
+
     let localid = localStorage.getItem("id");
     let localtoken = localStorage.getItem("token");
     let endtime = this.Unix_timestamp(this.props.endtime);
@@ -83,7 +131,7 @@ class Popup extends Component {
                 </div>
               )}
             </div>
-            <a
+            <a onClick={this.setRetryEvent}
               href={
                 this.props.game.game_url +
                 "?id=" +

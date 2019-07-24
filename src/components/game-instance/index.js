@@ -15,7 +15,8 @@ class GamesInstance extends React.Component {
       gamePage: false,
       firstStart: sessionStorage.getItem("firstStart"),
       startStatus: "شروع",
-      gameState: this.props.gameState
+      gameState: this.props.gameState,
+      gameType: "general"
     };
     this.handleClick = this.handleClick.bind(this);
     this.backToList = this.backToList.bind(this);
@@ -48,6 +49,7 @@ class GamesInstance extends React.Component {
     return Object.keys(unique);
   }
   handleClick(event) {
+
     localStorage.setItem(
       "id",
       event.target.closest(".gamebox").getAttribute("dataid")
@@ -64,6 +66,7 @@ class GamesInstance extends React.Component {
       infoShow: true,
       gamePage: true
     });
+    localStorage.setItem("gameType",this.state.gameType);
   }
   backToList() {
     this.setState({ isShow: true });
@@ -91,6 +94,7 @@ class GamesInstance extends React.Component {
   }
 
   render() {
+
     // let starttime = this.Unix_timestamp(this.props.starttime);
     let endtime = this.Unix_timestamp(this.props.endtime);
     let nowtime = new Date();
@@ -201,6 +205,8 @@ class GamesInstance extends React.Component {
             gamename={this.props.gamename}
             gameState={this.state.gameState}
             showState={this.state.infoShow}
+            gameType={localStorage.getItem("gameType")}
+
           />
         ) : null}
       </React.Fragment>

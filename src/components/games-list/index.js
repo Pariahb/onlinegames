@@ -21,13 +21,15 @@ class GamesList extends React.Component {
       gameState: null,
       webengage: window.webengage,
       hasSpecialGame: false,
-      specialGameName: null,
-      activeGames: []
+      specialGameName: "",
+      activeGames: [],
+      gameType: "general"
     };
     this.changeNavbarInfo = this.changeNavbarInfo.bind(this);
     this.apiCall = this.apiCall.bind(this);
     this.hideTopbar = this.hideTopbar.bind(this);
     this.showTopbar = this.showTopbar.bind(this);
+
   }
   changeNavbarInfo(text, link) {
     this.setState({
@@ -49,7 +51,6 @@ class GamesList extends React.Component {
           items: response.data.instances,
           isShow: false
         });
-
         let hasspecial = [];
         let sortedList = [];
         let actives = [];
@@ -57,6 +58,9 @@ class GamesList extends React.Component {
           function(item) {
             if (item["active"] === true) {
               actives.push(item);
+              this.setState({
+                activeGames: actives
+              });
             }
 
             if (item["special"]) {
@@ -66,14 +70,12 @@ class GamesList extends React.Component {
               } else {
                 sortedList = hasspecial;
               }
-              console.log("hasspecial", hasspecial);
               let nowtime = new Date();
 
               this.setState({
-                activeGames: actives,
-                specialGames: hasspecial,
+                specialGames: sortedList,
                 hasSpecialGame: true,
-                specialGameName: hasspecial[0].game.name
+                specialGameName: sortedList[0].game.name
               });
 
               if (this.state.specialGames[0].active !== true) {
@@ -96,17 +98,28 @@ class GamesList extends React.Component {
                 }
               }
             }
+            else{
+              this.setState({
+                gameType: "general"
+              });
+            }
+
           }.bind(this)
+
         );
-      })
+        this.webEngage();
+    })
       .catch(error => {
         this.setState({
           isLoaded: true,
           error: error
         });
+        this.state.webengage.track("web_game_error_message", {
+          error_type: error.message
+        });
       });
-  }
 
+  }
   isSpecialGame(x) {
     return x.special === true;
   }
@@ -123,8 +136,12 @@ class GamesList extends React.Component {
     return comparison;
   }
   componentDidMount() {
-    this.apiCall();
+   this.apiCall();
+
     this.mycall = setInterval(this.apiCall, 30000);
+
+  }
+  webEngage(){
     this.state.webengage.track("web_game_visited", {
       special_game_name: this.state.specialGameName,
       has_special_game: this.state.hasSpecialGame,
@@ -143,6 +160,9 @@ class GamesList extends React.Component {
   }
   componentWillUnmount() {
     clearInterval(this.mycall);
+    this.setState({
+      activeGames: []
+    });
   }
   refreshPage() {
     window.location.reload();
@@ -160,6 +180,7 @@ class GamesList extends React.Component {
               تلاش مجدد
             </button>
           </div>
+
         </React.Fragment>
       );
     }
@@ -168,12 +189,15 @@ class GamesList extends React.Component {
         <React.Fragment>
           <div className="loader-wrapper">
             <div className="loader" />
+
           </div>
         </React.Fragment>
       );
     } else {
+
       return (
         <React.Fragment>
+
           <div
             className="top-bar"
             style={{ display: this.state.topBarDisplay ? "flex" : "none" }}
@@ -233,6 +257,7 @@ class GamesList extends React.Component {
                       hideTopbar={this.hideTopbar}
                       showTopbar={this.showTopbar}
                       gameState={this.state.gameState}
+                      gameType={this.state.gameType}
                     />
                   )
                 )

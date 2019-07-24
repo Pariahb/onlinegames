@@ -1,7 +1,6 @@
 import React from "react";
 import LeaderBoard from "../leader-board";
 import GameInfo from "../gameinfo";
-// import axios from "axios";
 import "./style.css";
 import "../leader-board/style.css";
 
@@ -15,10 +14,12 @@ class Game extends React.Component {
       error: null,
       rootitems: [],
       isShow: this.props.showState,
-      gameState: this.props.gameState
+      gameState: this.props.gameState,
+      webengage: window.webengage
     };
     this.setGameToken = this.setGameToken.bind(this);
     this.appendToStorage = this.appendToStorage.bind(this);
+
   }
 
   toPersianDigits(string) {
@@ -91,14 +92,20 @@ class Game extends React.Component {
           yourPrize,
           yourNextLevelPoint,
           yourNextLevelPrize
+
         );
+        this.webEngage();
       })
       .catch(error => {
         this.setState({
           isLoaded: true,
           error: error
         });
+        this.state.webengage.track("web_game_error_message", {
+          error_type: error.message
+        });
       });
+
   }
   appendToStorage(name, data) {
     let old = localStorage.getItem(name);
@@ -110,8 +117,33 @@ class Game extends React.Component {
     sessionStorage.setItem("gamePage", this.props.gametoken);
     sessionStorage.setItem("firstStart", "true");
     this.appendToStorage("tokenarray", localStorage.getItem("token"));
+    this.state.webengage.track("web_game_participated", {
+      game_name: this.props.gamename,
+      type: this.props.gameType,
+      game_token : this.props.gametoken,
+      score: this.state.rootitems.your_points,
+      rank:this.state.rootitems.your_rank,
+      amount_won: this.state.rootitems.your_prize
+    });
   }
-
+webEngage(){
+  // console.log("type",this.props.gameType)
+  // console.log("status",this.props.active ? "ongoing" : "finished")
+  // console.log("game_name",this.props.gamename)
+  // console.log("game_token", this.props.gametoken)
+  // console.log("score", this.state.rootitems.your_points)
+  // console.log("rank", this.state.rootitems.your_rank)
+  // console.log("amount_won", this.state.rootitems.your_prize)
+  this.state.webengage.track("web_game_info_visited", {
+    type: this.props.gameType,
+    status: this.props.active ? "ongoing" : "finished",
+    game_name: this.props.gamename,
+    game_token : this.props.gametoken,
+    score: this.state.rootitems.your_points,
+    rank:this.state.rootitems.your_rank,
+    amount_won: this.state.rootitems.your_prize
+  });
+}
   render() {
     const { error, isLoaded, items, rootitems } = this.state;
     let avatarInfo = this.avatarGenerator(localStorage.getItem("id"));
@@ -157,6 +189,7 @@ class Game extends React.Component {
               gametoken={this.props.gametoken}
               gamename={this.props.gamename}
               gameState={this.state.gameState}
+              gameType={this.props.gameType}
             />
             <div
               className="leaders"
@@ -237,11 +270,19 @@ class Game extends React.Component {
                         index={item.index}
                         rank={item.rank}
                         yourRank={rootitems.your_rank}
+                        yourPoints={rootitems.your_points}
+                        yourPrize={rootitems.your_prize}
                         points={item.points}
                         username={item.username}
                         userid={item.user_id}
                         prize={item.prize}
                         key={index}
+                        active={this.props.active}
+                        gameid={this.props.gameid}
+                        gametoken={this.props.gametoken}
+                        gamename={this.props.gamename}
+                        gameType={this.props.gameType}
+                        webEngage={this.webEngage}
                       />
                     ))
                   : null}
@@ -255,9 +296,9 @@ class Game extends React.Component {
                   this.props.game.game_url +
                   "?id=" +
                   localid +
-                  "&?token=" +
+                  "&token=" +
                   localtoken +
-                  "&?sessionid=" +
+                  "&sessionid=" +
                   localStorage.getItem("sessionId")
                 }
                 onClick={this.setGameToken}

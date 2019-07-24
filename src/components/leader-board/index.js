@@ -47,6 +47,7 @@ class LeaderBoard extends React.Component {
       avatarBg: backgroundColors[backgroundColorIndex]
     };
   }
+
   render() {
     return (
       <React.Fragment>

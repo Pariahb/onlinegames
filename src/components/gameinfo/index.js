@@ -7,7 +7,8 @@ class GameInfo extends React.Component {
     super(props);
     this.state = {
       isShow: false,
-      prizes: this.props.prizes
+      prizes: this.props.prizes,
+      gameType: this.props.gameType
     };
   }
   toPersianDigits(string) {
@@ -16,6 +17,7 @@ class GameInfo extends React.Component {
       return id[+w];
     });
   }
+
   avatarGenerator(userId) {
     let ic_avatar_01 = require("../../../public/images/ic_avatar_01.png");
     let ic_avatar_02 = require("../../../public/images/ic_avatar_02.png");
@@ -74,7 +76,7 @@ class GameInfo extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="game-container">
+        <div className="game-container" >
           <div className="main-content">
             <div className="top-section">
               <img src={this.props.game.big_pic_url} alt="banner" />

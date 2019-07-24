@@ -23,7 +23,8 @@ class SpecialGame extends React.Component {
       startsecs: 0,
       gameState: this.props.gameState,
       startTime: this.props.starttime,
-      endTime: this.props.endtime
+      endTime: this.props.endtime,
+      gameType: "special"
     };
     this.handleClick = this.handleClick.bind(this);
     this.backToList = this.backToList.bind(this);
@@ -114,7 +115,10 @@ class SpecialGame extends React.Component {
       isShow: false,
       infoShow: true,
       gamePage: true
+
     });
+    localStorage.setItem("gameType",this.state.gameType);
+
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.gameState !== this.props.gameState) {
@@ -265,6 +269,7 @@ class SpecialGame extends React.Component {
             gametoken={this.props.gametoken}
             gamename={this.props.gamename}
             showState={this.state.infoShow}
+            gameType={localStorage.getItem("gameType")}
           />
         ) : null}
       </React.Fragment>
